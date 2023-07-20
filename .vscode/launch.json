@@ -2,6 +2,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Test",
+      "request": "launch",
+      "mainClass": "mqttclient.impl.Test",
+      "projectName": "IevdDemo"
+    },
+    {
+      "type": "java",
+      "name": "MqttConnector",
+      "request": "launch",
+      "mainClass": "mqttclient.impl.MqttConnector",
+      "projectName": "IevdDemo"
+    },
+    {
+      "type": "java",
       "name": "Launch Mendix Program",
       "projectName": "IevdDemo",
       "javaExec": "c:/Program Files/Eclipse Adoptium/jdk-11.0.16.101-hotspot/bin/java.exe",

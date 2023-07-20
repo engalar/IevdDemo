@@ -139,6 +139,7 @@ public class MqttConnector {
                 this.client = new MqttClient(brokerURL, clientId, persistence);
                 this.client.setCallback(new MxMqttCallback(this.brokerKey, this, this.subscriptions));
                 
+                System.out.println(brokerURL);
                 logger.debug("Connecting to broker: " + brokerURL);
                 IMqttToken token = this.client.connectWithResult(connOpts);
                 token.waitForCompletion(connectionTimeout);

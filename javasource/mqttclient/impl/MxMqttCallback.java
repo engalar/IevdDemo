@@ -37,7 +37,8 @@ public class MxMqttCallback implements MqttCallbackExtended {
     public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
         try {
             MqttConnector.logger.debug(String.format("Message Arrived for: %s | %s | %s", this.brokerKey, topic, new String(mqttMessage.getPayload())));
-
+            System.out.println(topic);
+            System.out.println(2);
             MqttSubscription subscription = getSubscriptionForTopic(topic);
             if (subscription != null) {
                 String microflow = subscription.getOnMessageMicroflow();
