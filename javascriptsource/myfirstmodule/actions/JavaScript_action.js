@@ -229,23 +229,54 @@ function main(Konva, containerId) {
 			layerTxt.draw();
 		}
 
-		const socket = new WebSocket(mx.appUrl.replace('http', 'ws') + 'ws');
 
-		socket.onopen = () => {
-			console.log('Connected to server');
-		};
 
-		socket.onmessage = (event) => {
-			console.log(event.data);
-			updateKonvaObjects(JSON.parse(event.data));
-		};
+		const appUrl = mx.appUrl.replace('http', 'ws');
+		let socket = null;
+		let reconnectInterval = 2000; // 重连间隔，单位：毫秒
+		let maxReconnectAttempts = 10; // 最大重连尝试次数
 
-		socket.onclose = () => {
-			console.log('Disconnected from server');
-		};
+		let reconnectAttempts = 0;
+
+		function createWebSocket() {
+			// 创建WebSocket连接
+			socket = new WebSocket(appUrl + 'ws');
+
+			// 添加事件监听器
+			socket.onopen = () => {
+				console.log('WebSocket连接已打开');
+				reconnectAttempts = 0;
+			};
+
+			socket.onmessage = (event) => {
+				console.log('WebSocket收到消息:', event.data);
+				// 在此处理接收到的消息
+				updateKonvaObjects(JSON.parse(event.data));
+			};
+
+			socket.onclose = (event) => {
+				console.log('WebSocket连接已关闭');
+				if (reconnectAttempts < maxReconnectAttempts) {
+					// 尝试自动重连
+					reconnectAttempts++;
+					console.log(`尝试第 ${reconnectAttempts} 次重连...`);
+					setTimeout(createWebSocket, reconnectInterval);
+				} else {
+					console.log('达到最大重连次数，停止重连。');
+				}
+			};
+
+			socket.onerror = (error) => {
+				console.error('WebSocket错误:', error);
+				// 在此处理错误
+			};
+		}
+
+		createWebSocket();
 
 		onDestroy(containerId, () => {
 			//dispose
+			reconnectAttempts = maxReconnectAttempts;
 			socket.close();
 		});
 
