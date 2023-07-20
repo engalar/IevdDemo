@@ -1,0 +1,16 @@
+{
+  "start": false,
+  "stop": false,
+  "reset": true,
+  "step": "Filling Bottle",
+  "number_produced": 65535,
+  "number_faulty": 65535,
+  "tank_level": 1600,
+  "tank_temperature": 80,
+  "tank_pressure": 80,
+  "bottle_level": 100,
+  "energy_consumption_filling_tank": 300,
+  "water_consumption_filling_tank": 1600,
+  "energy_consumption_heating_tank": 600,
+  "energy_consumption_filling_bottles": 1800
+}

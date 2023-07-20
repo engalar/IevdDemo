@@ -1,0 +1,16 @@
+{
+  "start": false,
+  "stop": false,
+  "reset": true,
+  "step": "Reset",
+  "number_produced": 0,
+  "number_faulty": 0,
+  "tank_level": 0,
+  "tank_temperature": 20,
+  "tank_pressure": 0,
+  "bottle_level": 0,
+  "energy_consumption_filling_tank": 0,
+  "water_consumption_filling_tank": 0,
+  "energy_consumption_heating_tank": 0,
+  "energy_consumption_filling_bottles": 0
+}
